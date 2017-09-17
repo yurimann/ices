@@ -1,0 +1,15 @@
+<%= form_for @sale do |f| %>
+  <div class="sales-box">
+    <%= f.label :date %>
+    <%= f.date_field :date %>
+  </div>
+  <div class="sales-box">
+    <%= f.label "Amount $" %>
+    <%= f.text_field :amount %>
+  </div>
+  <div class="sales-box">
+    <%= f.label :sale_type %>
+    <%= f.select :sale_type, ["Cash", "Credit Card", "Online", "Skip The Dishes"] %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>

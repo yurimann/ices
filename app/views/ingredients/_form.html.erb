@@ -1,0 +1,15 @@
+<%= form_for @ingredient do |f| %>
+  <div class="sales-box">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="sales-box">
+    <%= f.label :package_quantity %>
+    <%= f.number_field :package_quantity %>
+  </div>
+  <div class="sales-box">
+    <%= f.label "Price" %>
+    <%= f.text_field :cost %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>

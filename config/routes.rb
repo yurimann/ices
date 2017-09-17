@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "sales#new"
+  root to: "sales#index"
   resources :expenses
   resources :sales
   resources :ingredients

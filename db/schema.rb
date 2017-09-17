@@ -45,12 +45,11 @@ ActiveRecord::Schema.define(version: 20170916153519) do
   end
 
   create_table "sales", force: :cascade do |t|
-    t.float    "cash"
-    t.float    "online"
-    t.float    "credit_card"
-    t.float    "skip_the_dishes"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.float    "amount"
+    t.string   "sale_type"
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

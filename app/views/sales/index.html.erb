@@ -1,0 +1,4 @@
+<%= form_tag recipes_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+  <%= select_date(date = Date.current, options = {}, html_options = {}) %>
+  <%= select_date(date = Date.current, options = {}, html_options = {}) %>
+<% end %>
