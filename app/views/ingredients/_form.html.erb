@@ -5,7 +5,11 @@
   </div>
   <div class="sales-box">
     <%= f.label :package_quantity %>
-    <%= f.number_field :package_quantity %>
+    <%= f.text_field :package_quantity %>
+  </div>
+  <div class="sales-box">
+    <%= f.label :unit %>
+    <%= f.select :unit, ['g', 'ml', 'oz', 'lb'] %>
   </div>
   <div class="sales-box">
     <%= f.label "Price" %>

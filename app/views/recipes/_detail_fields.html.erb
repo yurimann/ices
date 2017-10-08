@@ -1,0 +1,9 @@
+<div class='nested_fields'>
+  <div class='nested-fields'>
+    <%= f.label 'Ingredient' %>
+    <%= f.select(:ingredient_id, ingredients_for_select, prompt: 'Select')%>
+
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+</div>

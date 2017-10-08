@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'details/index'
+
+  get 'details/new'
+
+  get 'details/create'
+
+  get 'details/edit'
+
+  get 'details/update'
+
+  get 'details/delete'
+
   root to: "sales#index"
   resources :expenses
   resources :sales
