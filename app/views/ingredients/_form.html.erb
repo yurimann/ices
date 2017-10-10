@@ -9,11 +9,11 @@
   </div>
   <div class="sales-box">
     <%= f.label :unit %>
-    <%= f.select :unit, ['g', 'ml', 'oz', 'lb'] %>
+    <%= f.select :unit, ['g', 'ml', 'oz', 'lb', 'piece'] %>
   </div>
   <div class="sales-box">
     <%= f.label "Price" %>
-    <%= f.text_field :cost %>
+    $<%= f.text_field :cost %>
   </div>
   <%= f.submit "Submit" %>
 <% end %>

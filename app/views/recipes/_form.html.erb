@@ -1,7 +1,11 @@
 <%= form_for @recipe do |f| %>
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label "Recipe Name" %>
     <%= f.text_field :name %></br>
+  </div>
+  <div class="field">
+    <%= f.label "Yield" %>
+    <%= f.number_field :serving_size %> Piece/s</br>
   </div>
   <div class="field">
     <%= f.fields_for :details do |detail| %>

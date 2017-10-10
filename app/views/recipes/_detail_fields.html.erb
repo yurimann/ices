@@ -2,8 +2,10 @@
   <div class='nested-fields'>
     <%= f.label 'Ingredient' %>
     <%= f.select(:ingredient_id, ingredients_for_select, prompt: 'Select')%>
-
     <%= f.label :quantity %>
     <%= f.number_field :quantity %>
+    <%= f.select :unit, ['g', 'ml', 'oz', 'lb', 'piece'] %>
+    <%# f.select(:unit, ingredient_unit, prompt: "Select") %>
+    <%= link_to_remove_association "Remove ingredient", f %>
   </div>
 </div>

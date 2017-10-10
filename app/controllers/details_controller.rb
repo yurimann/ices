@@ -22,6 +22,6 @@ class DetailsController < ApplicationController
   private
 
   def detail_params
-    params.require(:detail).permit(:recipe_id, :ingredient_id, :quantity)
+    params.require(:detail).permit(:recipe_id, :ingredient_id, :quantity, :unit)
   end
 end

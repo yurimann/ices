@@ -1,0 +1,8 @@
+<%= @recipe.name %></br>
+Serves <%= @recipe.serving_size %> pieces</br>
+<% @details.each do |detail| %>
+  <%= Ingredient.find(detail.ingredient_id).name %>
+  <%= detail.quantity %>
+  <%= detail.unit %></br>
+<% end %>
+Cost per piece: <%= number_to_currency(calculate_unit_cost) %>
