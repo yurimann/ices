@@ -1,5 +1,10 @@
+<%= form_tag write_path, method: :get, target: "_blank",class: "navbar-form navbar-left search-form" do %>
+  <input type="hidden" value="<%= @from %>" name="from">
+  <input type="hidden" value="<%= @to%>" name="to">
+  <%= submit_tag "Export to CSV" %>
+<% end %></br>
 <% @sales.each do |sale| %>
-  <%= sale.amount %>
+  <%= number_to_currency(sale.amount) %>
   <%= sale.sale_type %>
   <%= sale.date %></br>
 <% end %>

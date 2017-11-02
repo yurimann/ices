@@ -1,5 +1,5 @@
 <%= @recipe.name %></br>
-Serves <%= @recipe.serving_size %> pieces</br>
+Yield <%= @recipe.serving_size %> pieces</br>
 <% @details.each do |detail| %>
   <%= Ingredient.find(detail.ingredient_id).name %>
   <%= detail.quantity %>

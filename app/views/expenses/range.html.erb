@@ -1,0 +1,15 @@
+<%= form_tag write_expenses_path, method: :get, target: "_blank",class: "navbar-form navbar-left search-form" do %>
+  <input type="hidden" value="<%= @from %>" name="from">
+  <input type="hidden" value="<%= @to%>" name="to">
+  <%= submit_tag "Export to CSV" %>
+<% end %></br>
+
+<% total = 0 %>
+<% @expenses.each do |expense| %>
+  <%= number_to_currency(expense.amount) %>
+  <%= expense.expense_type %>
+  <%= expense.date %>
+  <%= expense.notes %></br>
+  <% total += expense.amount %>
+<% end %>
+Total Expenses: <%= number_to_currency(total) %>

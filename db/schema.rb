@@ -16,29 +16,27 @@ ActiveRecord::Schema.define(version: 20171009034201) do
     t.integer  "recipe_id"
     t.integer  "ingredient_id"
     t.integer  "quantity"
-    t.string   "unit"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-
+    t.string   "unit"
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.string   "type"
+    t.string   "expense_type"
     t.date     "date"
     t.float    "amount"
     t.string   "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name"
     t.float    "package_quantity"
     t.float    "cost"
-    t.string   "unit"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-
+    t.string   "unit"
   end
 
   create_table "recipes", force: :cascade do |t|

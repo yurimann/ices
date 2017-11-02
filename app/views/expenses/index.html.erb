@@ -1,8 +1,8 @@
-<%= form_tag range_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+<%= form_tag expenses_range_path, method: :get, class: "navbar-form navbar-left search-form" do %>
   <% today = Date.today %>
   <%= label_tag(:from, "From: ") %>
   <%= select_date(today, prefix: "from") %></br>
   <%= label_tag(:to, "To: ") %>
   <%= select_date(today, prefix: "to") %></br>
-  <%= submit_tag 'Submit', format: :csv %>
+  <%= submit_tag 'Submit'%>
 <% end %>

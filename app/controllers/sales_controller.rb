@@ -36,15 +36,22 @@ class SalesController < ApplicationController
   end
 
   def range
+
     month = helpers.date_formatter(params[:from][:month])
     day = helpers.date_formatter(params[:from][:day])
-    from = "#{params[:from][:year]}-#{month}-#{day}"
+    @from = "#{params[:from][:year]}-#{month}-#{day}"
 
     to_month = helpers.date_formatter(params[:to][:month])
     to_day = helpers.date_formatter(params[:to][:day])
-    to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
-    byebug
-    @sales = Sale.sale_range(from, to)
+    @to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
+
+    @sales = Sale.sale_range(@from, @to)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @sales }
+    end
+
   end
 
   private
@@ -52,6 +59,5 @@ class SalesController < ApplicationController
   def sales_params
     params.require(:sale).permit(:date, :amount, :sale_type)
   end
-
 
 end

@@ -2,6 +2,8 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+    ingredients = Ingredient.all
+    ingredients.each { |ingredient| helpers.convert(ingredient)}
   end
 
   def show
