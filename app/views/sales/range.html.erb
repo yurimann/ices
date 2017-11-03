@@ -1,10 +1,22 @@
 <%= form_tag write_path, method: :get, target: "_blank",class: "navbar-form navbar-left search-form" do %>
   <input type="hidden" value="<%= @from %>" name="from">
   <input type="hidden" value="<%= @to%>" name="to">
-  <%= submit_tag "Export to CSV" %>
+  <%= submit_tag "Export to CSV", id: "export-button" %>
 <% end %></br>
-<% @sales.each do |sale| %>
-  <%= number_to_currency(sale.amount) %>
-  <%= sale.sale_type %>
-  <%= sale.date %></br>
-<% end %>
+<table>
+  <tr>
+    <td class="form-header">Amount</td>
+    <td class="form-header">Type</td>
+    <td class="form-header">Date</td>
+  </tr>
+  <% total = 0 %>
+  <% @sales.each do |sale| %>
+    <tr>
+      <td><%= number_to_currency(sale.amount) %></td>
+      <td><%= sale.sale_type %></td>
+      <td><%= sale.date %></td>
+    </tr>
+    <% total += sale.amount %>
+  <% end %>
+</table>
+<p>Total sales during the period: <%= number_to_currency(total) %>

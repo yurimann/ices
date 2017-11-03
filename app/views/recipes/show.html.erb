@@ -1,8 +1,18 @@
-<%= @recipe.name %></br>
-Yield <%= @recipe.serving_size %> pieces</br>
-<% @details.each do |detail| %>
-  <%= Ingredient.find(detail.ingredient_id).name %>
-  <%= detail.quantity %>
-  <%= detail.unit %></br>
-<% end %>
-Cost per piece: <%= number_to_currency(calculate_unit_cost) %>
+<table>
+  <tr>
+    <td colspan="3" class="form-header"><%= @recipe.name %></td>
+  </tr>
+  <tr>
+    <td colspan="3" style="text-align:center;">Yield <%= @recipe.serving_size %> pieces</td>
+  </tr>
+  <% @details.each do |detail| %>
+    <tr>
+      <td><%= Ingredient.find(detail.ingredient_id).name %></td>
+      <td><%= detail.quantity %></td>
+      <td><%= detail.unit %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="3" style="text-align:center;">Cost per piece: <%= number_to_currency(calculate_unit_cost) %></td>
+  </tr>
+</table>

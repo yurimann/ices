@@ -9,13 +9,24 @@
   </head>
 
   <body>
-    <%= link_to "Home", root_path %></br>
-    <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% elsif flash[:alert] %>
-      <div class="notice"><%= flash[:alert] %></div>
-    <% end %>
-    <%= yield %>
+    <nav>
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "New Expense", new_expense_path %></li>
+        <li><%= link_to "New Recipe", new_recipe_path %></li>
+        <li><%= link_to "New Ingredient", new_ingredient_path %></li>
+        <li><%= link_to "Sales Summary", sales_path %></li>
+        <li><%= link_to "Expense Summary", expenses_path %></li>
+        <li><%= link_to "View Recipes", recipes_path %></li>
+      </ul>
+    </nav>
+    <content>
+      <% if flash[:notice] %>
+        <div class="notice"><%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class="notice"><%= flash[:alert] %></div>
+      <% end %>
+      <%= yield %>
+    </content>
   </body>
 </html>
-<%= console %>

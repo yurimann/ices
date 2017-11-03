@@ -1,0 +1,57 @@
+@import 'variables';
+
+* {
+  margin: 0 auto;
+  font-size: 16px;
+  font-family: $primary-font;
+  padding: 0;
+}
+
+body {
+
+}
+
+nav {
+  background-color: black;
+  margin-bottom: 20px;
+  padding: -20px;
+}
+
+ul {
+  text-align: center;
+}
+
+li {
+  display: inline-block;
+  padding: 10px 15px;
+}
+
+content {
+  display: block;
+  padding: 20px 20px 20px 20px;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+a:hover {
+  color: $secondary-color;
+}
+td {
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.form-header {
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(236,233,222);
+}
+
+#export-button {
+  display: inherit;
+  padding: 10px;
+  border-radius: 10px;
+}
