@@ -31,6 +31,10 @@ content {
   padding: 20px 20px 20px 20px;
 }
 
+p {
+  text-align: center;
+}
+
 a {
   text-decoration: none;
   color: $primary-color;
@@ -48,6 +52,10 @@ td {
   text-align: center;
   font-weight: bold;
   background-color: rgb(236,233,222);
+}
+
+.total {
+  font-weight: bold;
 }
 
 #export-button {

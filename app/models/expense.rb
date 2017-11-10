@@ -19,4 +19,29 @@ class Expense < ApplicationRecord
       x = true
     end
   end
+
+  def self.import_file
+    book = Spreadsheet.open("expense_report.xls")
+    row = book.worksheet('Sheet1')
+
+    x = 1
+    result = []
+    until row[x,0].nil? do
+      y = 0
+      until row[x,y].nil? do
+        pair = {}
+        pair[row[0,y].downcase] = row[x,y]
+        result << pair
+        y += 1
+      end
+    a = 0
+    until a >= result.length - 1 do
+      temp = result[0].merge(result[a + 1])
+      result[0] = temp
+      a += 1
+    end
+      Expense.create(temp)
+      x += 1
+    end
+  end
 end

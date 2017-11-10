@@ -1,7 +1,9 @@
 class SummaryController < ApplicationController
+
   def index
     @sales = Sale.all
     @expenses = Expense.all
+    Expense.import_file
   end
 
   def write_to_excel
@@ -46,21 +48,25 @@ class SummaryController < ApplicationController
       worksheet = workbook.add_worksheet
       x = 0
       until x > 3 do
-        headers = ["Amount", "Expense Type", "Date", "Notes"]
+        headers = ["date", "expense_type", "notes", "amount"]
         worksheet.write(0, x, headers[x])
         x += 1
       end
 
       y = 1
       z = 0
+      total = 0
       until y > export_data.length do
-        worksheet.write(y, 0, export_data[z].amount)
+        total += export_data[z].amount
+        worksheet.write(y, 0, export_data[z].date)
         worksheet.write(y, 1, export_data[z].expense_type)
-        worksheet.write(y, 2, export_data[z].date)
-        worksheet.write(y, 3, export_data[z].notes)
+        worksheet.write(y, 2, export_data[z].notes)
+        worksheet.write(y, 3, export_data[z].amount)
         y += 1
         z += 1
       end
+      worksheet.write(export_data.length + 1, 2, "Total Expenses")
+      worksheet.write(export_data.length + 1, 3, total)
       workbook.close
     end
 end
