@@ -13,11 +13,19 @@
       <td><%= Ingredient.find(detail.ingredient_id).name %></td>
       <td><%= detail.quantity %></td>
       <td><%= detail.unit %></td>
-
-
     </tr>
   <% end %>
+  <% cost = calculate_unit_cost %>
   <tr>
-    <td colspan="3" style="text-align:center;">Cost per piece: <%= number_to_currency(calculate_unit_cost) %></td>
+    <td>Cost per piece:</td>
+    <td colspan="2" style="text-align:center;"><%= number_to_currency(cost) %></td>
+  </tr>
+  <tr>
+    <td>Selling Price:</td>
+    <td colspan="2" style="text-align:center;"> <%= number_to_currency(@recipe.selling_price) %></td>
+  </tr>
+  <tr>
+    <td>Profit Margin Per Piece:</td>
+    <td style="text-align:center;" colspan="2"> <%= number_to_currency(@recipe.selling_price - cost) %></td>
   </tr>
 </table>
