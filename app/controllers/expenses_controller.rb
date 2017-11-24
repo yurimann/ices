@@ -19,12 +19,31 @@ class ExpensesController < ApplicationController
   end
 
   def edit
+    @expense = Expense.find(params[:id])
   end
 
   def update
+    @expense = Expense.find(params[:id])
+    if @expense.update(expense_params)
+      flash[:notice] = "Successfully updated expense"
+      redirect_to root_path
+    else
+      flash[:alert] = "Warning Batman! Warning! Expense not updated"
+      render edit_expense_path
+    end
+
   end
 
-  def delete
+  def destroy
+    @expense = Expense.find(params[:id])
+    if @expense.destroy
+      flash[:notice] = "Successfully deleted expense"
+      redirect_to root_path
+    else
+      flash[:alert] = "Warning Batman! Warning! Expense not deleted"
+      render expenses_range_path
+    end
+
   end
 
   def range

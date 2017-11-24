@@ -3,6 +3,9 @@
     <td colspan="3" class="form-header"><%= @recipe.name %></td>
   </tr>
   <tr>
+    <td colspan="3" style="text-align:center"><%= link_to "Edit", edit_recipe_path(params[:id]) %></td>
+  </tr>
+  <tr>
     <td colspan="3" style="text-align:center;">Yield <%= @recipe.serving_size %> pieces</td>
   </tr>
   <% @details.each do |detail| %>
@@ -10,6 +13,8 @@
       <td><%= Ingredient.find(detail.ingredient_id).name %></td>
       <td><%= detail.quantity %></td>
       <td><%= detail.unit %></td>
+
+
     </tr>
   <% end %>
   <tr>

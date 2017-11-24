@@ -15,6 +15,8 @@
       <td><%= sale.date %></td>
       <td><%= sale.sale_type %></td>
       <td><%= number_to_currency(sale.amount) %></td>
+      <td><%= link_to "Edit", edit_sale_path(sale.id) %></td>
+      <td><%= link_to 'Delete', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% total += sale.amount %>
   <% end %>

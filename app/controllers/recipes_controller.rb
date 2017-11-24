@@ -32,18 +32,28 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    @recipe = Recipe.find(params[:id])
   end
 
   def update
+    @recipe = Recipe.find(params[:id])
+    byebug
+    if @recipe.update(recipe_params)
+      flash[:notice] = "Yeah! Recipe edited!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Error Will Robinson, error!"
+      render new_recipe_path
+    end
   end
 
-  def delete
+  def destroy
   end
 
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :serving_size, details_attributes: [:quantity, :ingredient_id, :recipe_id, :unit, :_destroy])
+    params.require(:recipe).permit(:name, :serving_size, details_attributes: [:quantity, :ingredient_id, :recipe_id, :unit, :id, :_destroy])
   end
 
 end

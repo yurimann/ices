@@ -27,12 +27,30 @@ class SalesController < ApplicationController
   end
 
   def edit
+    @sale = Sale.find(params[:id])
   end
 
   def update
+    @sale = Sale.find(params[:id])
+
+    if @sale.update(sales_params)
+      flash[:notice] = "Successfully updated"
+      redirect_to root_path
+    else
+      flash[:alert] = "Something went wrong"
+      render edit_sale_path
+    end
   end
 
-  def delete
+  def destroy
+    @sale = Sale.find(params[:id])
+    if @sale.destroy
+      flash[:notice] = "Successfully deleted sale"
+      redirect_to root_path
+    else
+      flash[:alert] = "Warning Batman! Warning! Sale not deleted"
+      render sales_range_path
+    end
   end
 
   def range

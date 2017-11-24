@@ -1,8 +1,20 @@
+<table>
+  <tr>
+    <td class="form-header">Item</td>
+    <td class="form-header">Amount</td>
+    <td class="form-header">Unit</td>
+    <td class="form-header">Price</td>
+    <td class="form-header">Unit Cost $</td>
+  </tr>
 <% @ingredients.each do |ingredient| %>
-  <div>
-    <%= ingredient.name %>
-    <%= ingredient.package_quantity %>
-    <%= ingredient.unit %>
-    <%= ingredient.cost %>
-  </div>
+  <tr>
+    <td><%= ingredient.name %></td>
+    <td><%= (ingredient.package_quantity).round(2) %></td>
+    <td><%= ingredient.unit %></td>
+    <td><%= number_to_currency(ingredient.cost) %></td>
+    <td><%= (ingredient.cost/ingredient.package_quantity).round(3) %></td>
+    <td><%= link_to "Edit", edit_ingredient_path(ingredient.id) %></td>
+    <td><%= link_to 'Delete', ingredient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
 <% end %>
+</table>

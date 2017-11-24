@@ -1,7 +1,7 @@
 <%= form_for @expense do |f| %>
   <div class="field">
     <%= f.label :date %>
-    <%= f.date_field :date, value: Date.today %>
+    <%= f.date_field :date %>
   </div>
   <div class="field">
     <%= f.label :expense_type %>

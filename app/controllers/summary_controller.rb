@@ -3,7 +3,7 @@ class SummaryController < ApplicationController
   def index
     @sales = Sale.all
     @expenses = Expense.all
-    Expense.import_file
+    # Expense.import_file
   end
 
   def write_to_excel
