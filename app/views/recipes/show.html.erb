@@ -15,7 +15,7 @@
       <td><%= detail.unit %></td>
     </tr>
   <% end %>
-  <% cost = calculate_unit_cost %>
+  <% cost = calculate_unit_cost(@recipe.id) %>
   <tr>
     <td>Cost per piece:</td>
     <td colspan="2" style="text-align:center;"><%= number_to_currency(cost) %></td>

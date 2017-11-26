@@ -15,4 +15,5 @@ class Ingredient < ApplicationRecord
     end
     self.save
   end
+
 end

@@ -1,3 +1,23 @@
 <% @recipes.each do |recipe| %>
   <%= link_to(recipe.name, recipe_path(recipe.id)) %></br>
 <% end %>
+<button id="ten-display">Display top 10 most profitable products</button>
+<modal id="ten">
+  <div class="diplay-list">
+    <div class="close">
+      X
+    </div>
+    <table>
+      <tr>
+        <td class="form-header">Recipe Name</td>
+        <td class="form-header">Profit Margin per piece</td>
+      </tr>
+      <% @top_ten.each do |key, value| %>
+        <tr>
+          <td class="boxes"><%= key %></td>
+          <td style="text-align:center" class="boxes"><%= number_to_currency(value) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</modal>

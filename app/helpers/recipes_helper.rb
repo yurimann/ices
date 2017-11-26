@@ -1,7 +1,7 @@
 module RecipesHelper
-  def calculate_unit_cost
-    recipe = Recipe.find(params[:id])
-    details = @recipe.details
+  def calculate_unit_cost(recipe_id)
+    recipe = Recipe.find(recipe_id)
+    details = recipe.details
     subtotal = 0
     details.each do |detail|
       ingredient = Ingredient.find(detail.ingredient_id)

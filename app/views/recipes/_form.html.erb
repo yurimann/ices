@@ -8,6 +8,10 @@
     <%= f.number_field :serving_size %> Piece/s</br>
   </div>
   <div class="field">
+    <%= f.label "Selling Price per piece $" %>
+    <%= f.number_field :selling_price %> </br>
+  </div>
+  <div class="field">
     <%= f.fields_for :details do |detail| %>
       <%= render 'detail_fields', f: detail %>
     <% end %>

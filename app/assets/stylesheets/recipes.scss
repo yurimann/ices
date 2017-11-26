@@ -1,3 +1,31 @@
-// Place all the styles related to the recipes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+.boxes {
+  background: white;
+}
+
+.diplay-list {
+    background: $primary-color;
+    width: 40%;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 20px 0;
+    position: relative;
+}
+
+.close {
+    border: 2px solid black;
+    display: inline-block;
+    padding: 3px;
+    background: white;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 25px;
+}
+
+#ten {
+  display: none;
+}

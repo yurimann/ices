@@ -4,6 +4,15 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
     ingredients = Ingredient.all
     ingredients.each { |ingredient| helpers.convert(ingredient)}
+    @top_ten = {}
+
+    @recipes.each do |recipe|
+      unit_cost = helpers.calculate_unit_cost(recipe.id)
+      @top_ten[recipe.name] = unit_cost
+    end
+
+    @top_ten = @top_ten.sort_by {|k,v| v}.reverse.to_h
+    @top_ten = @top_ten.first(10).to_h
   end
 
   def show

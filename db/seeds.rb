@@ -23,12 +23,12 @@ end
   Ingredient.create(name: Faker::Food.ingredient, package_quantity: rand(2000..5000), unit: choice[x], cost: rand(2.99..10.99))
 
   5.times do
-    Detail.create(recipe_id: rand(1..10), ingredient_id: rand(1..15), unit: choice[x], quantity: rand(10..150), selling_price: 2.59)
+    Detail.create(recipe_id: rand(1..10), ingredient_id: rand(1..15), unit: choice[x], quantity: rand(10..150))
   end
 
 end
 
 10.times do
   x = "#{Faker::Food.dish} cupcake"
-  Recipe.create(name: x, serving_size: rand(50..75))
+  Recipe.create(name: x, serving_size: rand(50..75), selling_price: 2.59)
 end
