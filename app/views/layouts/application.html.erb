@@ -11,15 +11,18 @@
   <body>
     <nav>
       <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "New Sale", new_sale_path %></li>
-        <li><%= link_to "New Expense", new_expense_path %></li>
-        <li><%= link_to "New Recipe", new_recipe_path %></li>
-        <li><%= link_to "New Ingredient", new_ingredient_path %></li>
-        <li><%= link_to "Sales Summary", sales_path %></li>
-        <li><%= link_to "Expense Summary", expenses_path %></li>
-        <li><%= link_to "View Recipes", recipes_path %></li>
-        <li><%= link_to "View Ingredients", ingredients_path %></li>
+        <% if current_user %>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "New Sale", new_sale_path %></li>
+          <li><%= link_to "New Expense", new_expense_path %></li>
+          <li><%= link_to "New Recipe", new_recipe_path %></li>
+          <li><%= link_to "New Ingredient", new_ingredient_path %></li>
+          <li><%= link_to "Sales Summary", sales_path %></li>
+          <li><%= link_to "Expense Summary", expenses_path %></li>
+          <li><%= link_to "View Recipes", recipes_path %></li>
+          <li><%= link_to "View Ingredients", ingredients_path %></li>
+          <li><%= link_to ' Log Out ', log_out_path, method: :delete %></li>
+          <% end %>
       </ul>
     </nav>
     <content>

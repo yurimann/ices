@@ -1,8 +1,13 @@
 class SummaryController < ApplicationController
+  skip_before_action :require_login, only: :index
 
   def index
-    @sales = Sale.all
-    @expenses = Expense.all
+    if current_user
+      @sales = Sale.all
+      @expenses = Expense.all
+    else
+      redirect_back_or_to log_in_path
+    end
     # Expense.import_file
   end
 
