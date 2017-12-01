@@ -8,7 +8,7 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(expense_params)
-
+  
     if @expense.save
       flash[:notice] = "Successfully recorded expense"
       redirect_to root_path

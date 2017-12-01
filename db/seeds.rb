@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+User.create(email: "test@gmail.com", password: "password", password_confirmation: "password")
 5.times do
   Sale.create(date: Faker::Date.between(10.days.ago, Date.today), sale_type: "Cash", amount: Faker::Number.decimal(3, 3) )
   Sale.create(date: Faker::Date.between(20.days.ago, Date.today), sale_type: "Online", amount: Faker::Number.decimal(3, 3) )
