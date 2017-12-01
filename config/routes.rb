@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'expenses/range', to: 'expenses#range', as: 'expenses_range'
   get 'summary/write', to: 'summary#write_to_excel', as: 'write'
   get 'summary/write_expenses', to: 'summary#write_expenses', as: 'write_expenses'
+  post 'expenses/import', to: 'expenses#import_from_drive', as: 'import'
 
   get '/log_in', to: 'sessions#new', as: :log_in
   delete '/log_out', to: 'sessions#destroy', as: :log_out

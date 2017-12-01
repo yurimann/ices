@@ -6,3 +6,12 @@
   <%= select_date(today, prefix: "to") %></br>
   <%= submit_tag 'Submit'%>
 <% end %>
+
+<%= form_tag import_path, method: :post, class: "navbar-form navbar-left search-form" do %>
+  <% today = Date.today.month %>
+  <%= label_tag(:month, "month: ") %>
+  <%= text_field_tag :month %></br>
+  <%= label_tag(:year, "Year: ") %>
+    <%= text_field_tag :year %></br></br>
+  <%= submit_tag 'Submit', id: "import" %>
+<% end %>

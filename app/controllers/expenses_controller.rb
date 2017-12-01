@@ -8,7 +8,7 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.new(expense_params)
-  
+
     if @expense.save
       flash[:notice] = "Successfully recorded expense"
       redirect_to root_path
@@ -60,13 +60,44 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv do
-        response.headers['Content-Type'] = 'text/csv'
-        response.headers['Content-Disposition'] = 'attachment; filename=sales.csv'
-      end
-      format.json { render json: @sales }
+      format.json { render json: @expenses }
     end
 
+  end
+
+  def import_from_drive
+    respond_to do |format|
+      format.html
+      format.json { render json: "Done" }
+    end
+    File.read('config/initializers/config.json')
+    session = GoogleDrive::Session.from_config("config.json")
+    byebug
+    session.spreadsheets.each do |sheet|
+      if (sheet.title.downcase.include? "expenses") && (sheet.title.downcase.include? params[:month]) && (sheet.title.downcase.include? params[:year])
+
+        page = sheet.worksheets[0]
+        x = 3
+        until x >= (sheet.worksheets[0].rows.length) do
+
+          date = page[x, 1].to_date
+          expense_type = page[x,2]
+          notes = page[x,4]
+
+          amount = page[x,3]
+          amount = amount.split(//)
+          amount.delete(",")
+          amount.shift
+          amount = amount.join.to_f
+
+          unless amount <= 0
+            Expense.create(date: date, expense_type: expense_type, amount: amount , notes: notes)
+          end
+          x += 1
+        end
+      end
+    end
+      # redirect_back_or_to expenses_path
   end
 
   private
