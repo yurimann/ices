@@ -1,1 +1,26 @@
-<%= render 'form' %>
+<div class="center">
+  <div class="partition">
+    <h2>Select Date to Import from Drive</h2>
+    <%= form_tag import_path, method: :post, class: "navbar-form navbar-left search-form" do %>
+    <div class="field">
+      <% today = Date.today.month %>
+      <%= label_tag(:month, "month: ") %>
+      <%= select_month(Date.today) %>
+    </div>
+    <div class="field">
+      <%= label_tag(:year, "Year: ") %>
+      <%= select_year(Date.today) %>
+    </div>
+    <div class="field">
+      <%= submit_tag 'Submit', id: "import" %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<h1 style="text-align:center">-OR-</h1>
+<div class="center">
+  <div class="partition">
+    <h2>Manually Enter Expense</h2>
+    <%= render 'form' %>
+  </div>
+</div>

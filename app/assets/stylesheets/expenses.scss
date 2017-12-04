@@ -1,3 +1,22 @@
-// Place all the styles related to the expenses controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'variables';
+
+.center {
+    width: 100%;
+    text-align: center;
+}
+
+.partition {
+  background-color: rgb(236,233,222);
+  margin: 10px;
+  padding: 20px;
+  display: inline-block;
+  border: 2px solid black;
+
+  h2{
+    text-align: center;
+  }
+
+  .field {
+    text-align: center;
+  }
+}

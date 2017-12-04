@@ -66,15 +66,15 @@ class ExpensesController < ApplicationController
   end
 
   def import_from_drive
-    respond_to do |format|
-      format.html
-      format.json { render json: "Done" }
-    end
+
+    month = parse_number
+    year = params[:year]
+
     File.read('config/initializers/config.json')
     session = GoogleDrive::Session.from_config("config.json")
-    byebug
+
     session.spreadsheets.each do |sheet|
-      if (sheet.title.downcase.include? "expenses") && (sheet.title.downcase.include? params[:month]) && (sheet.title.downcase.include? params[:year])
+      if (sheet.title.downcase.include? "expenses") && (sheet.title.downcase.include? month) && (sheet.title.downcase.include? year)
 
         page = sheet.worksheets[0]
         x = 3
@@ -97,7 +97,11 @@ class ExpensesController < ApplicationController
         end
       end
     end
-      # redirect_back_or_to expenses_path
+    @expense = Expense.last
+    respond_to do |format|
+      format.html
+      format.json { render json: @expense}
+    end
   end
 
   private

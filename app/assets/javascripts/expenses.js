@@ -3,8 +3,11 @@ $(document).on("ready", function(){
     e.stopPropagation();
     e.preventDefault();
 
-    var month = $("#month").val()
-    var year = $("#year").val()
+    var month = $("#date_month").val()
+    var year = $("#date_year").val()
+
+    $("#import").attr("disabled", "disabled");
+    $("#import").val("Submitted");
 
     $.ajax({
       url: "/expenses/import",
@@ -13,8 +16,6 @@ $(document).on("ready", function(){
       method: "POST"
     }).done(function(e){
       console.log(e);
-    }).fail(function(){
-      console.log("FAILED");
     })
   })
 })
