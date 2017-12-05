@@ -12,7 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require react_ujs
-//= require components
 //= require cocoon
 //= require_tree .
