@@ -21,16 +21,4 @@ class Sale < ApplicationRecord
     end
   end
 
-  def self.generate_csv(sales)
-  header = ['sales_type', 'date', 'amount', 'notes']
-
-    CSV.generate(headers: true) do |csv|
-      csv << header
-
-      sales.each do |sale|
-        csv << [sale.sales_type, sale.date, sale.amount, sale.notes]
-      end
-    end
-  end
-
 end
