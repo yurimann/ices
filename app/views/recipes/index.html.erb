@@ -1,7 +1,4 @@
-<% @recipes.each do |recipe| %>
-  <%= link_to(recipe.name, recipe_path(recipe.id)) %></br>
-<% end %>
-<button id="ten-display">Display top 10 most profitable products</button>
+<button id="ten-display">Display top 10 most profitable products</button></br>
 <modal id="ten">
   <div class="diplay-list">
     <div class="close">
@@ -21,3 +18,9 @@
     </table>
   </div>
 </modal>
+
+<% @recipes.each do |recipe| %>
+  <div class="center">
+    <%= link_to(recipe.name, recipe_path(recipe.id)) %>
+  </div>
+<% end %>

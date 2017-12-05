@@ -1,31 +1,17 @@
-<div class="partition">
-  <h2>Select Date Range</h2>
-  <%= form_tag expenses_range_path, method: :get, class: "navbar-form navbar-left search-form" do %>
-    <% today = Date.today %>
-    <div class="field">
-      <%= label_tag(:from, "From: ") %>
-      <%= select_date(today, prefix: "from") %>
-    </div>
-    <div class="field">
-      <%= label_tag(:to, "To: ") %>
-      <%= select_date(today, prefix: "to") %>
-    </div>
-    <%= submit_tag 'Submit'%>
-  <% end %>
-</div>
-
-<div class="partition">
-  <h2>Select Import Month</h2>
-  <%= form_tag import_path, method: :post, class: "navbar-form navbar-left search-form" do %>
-  <div class="field">
-    <% today = Date.today.month %>
-    <%= label_tag(:month, "month: ") %>
-    <%= select_month(Date.today) %>
+<div class="center">
+  <div class="partition">
+    <h2>Select Date Range</h2>
+    <%= form_tag expenses_range_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+      <% today = Date.today %>
+      <div class="field">
+        <%= label_tag(:from, "From: ") %>
+        <%= select_date(today, prefix: "from") %>
+      </div>
+      <div class="field">
+        <%= label_tag(:to, "To: ") %>
+        <%= select_date(today, prefix: "to") %>
+      </div>
+      <%= submit_tag 'Submit'%>
+    <% end %>
   </div>
-  <div class="field">
-    <%= label_tag(:year, "Year: ") %>
-    <%= select_year(Date.today) %>
-  </div>
-  <%= submit_tag 'Submit', id: "import" %>
-  <% end %>
 </div>
