@@ -91,7 +91,10 @@ class ExpensesController < ApplicationController
           amount = amount.join.to_f
 
           unless amount <= 0
-            Expense.create(date: date, expense_type: expense_type, amount: amount , notes: notes)
+            expense = Expense.new(date: date, expense_type: expense_type, amount: amount , notes: notes)
+            unless Expense.exists?(date: date, expense_type: expense_type, amount: amount , notes: notes)
+              expense.save
+            end
           end
           x += 1
         end
