@@ -72,6 +72,56 @@ class SalesController < ApplicationController
 
   end
 
+  def import_sales_from_drive
+    month = parse_number
+    if params[:year] == nil
+      year = params[:date][:year]
+    else
+      year = params[:year]
+    end
+
+    File.read('config/initializers/config.json')
+    session = GoogleDrive::Session.from_config("config.json")
+
+    session.spreadsheets.each do |sheet|
+      if (sheet.title.downcase.include? "sales") && (sheet.title.downcase.include? month) && (sheet.title.downcase.include? year)
+
+        page = sheet.worksheets[0]
+        x = 3
+        until x >= (sheet.worksheets[0].rows.length) do
+          date = page[x, 1].to_date
+          amount_field = 2
+
+          until amount_field >= 6 do
+            amount = page[x, amount_field]
+
+            if amount.to_f > 0
+              amount = amount.split(//)
+              amount.delete(",")
+              amount.shift
+              amount = amount.join.to_f
+              sales_type = page[2, amount_field].capitalize
+            end
+          end
+
+          unless amount <= 0
+            sale = Sale.new(date: date, sales_type: sales_type, amount: amount)
+            unless Sale.exists?(date: date, sales_type: sales_type, amount: amount)
+              sale.save
+            end
+          end
+
+          x += 1
+        end
+      end
+    end
+    @sale = Sale.last
+    respond_to do |format|
+      format.html
+      format.json { render json: @sale}
+    end
+  end
+
   private
 
   def sales_params

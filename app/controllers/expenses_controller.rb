@@ -65,7 +65,7 @@ class ExpensesController < ApplicationController
 
   end
 
-  def import_from_drive
+  def import_expenses_from_drive
 
     month = parse_number
     year = params[:year]
