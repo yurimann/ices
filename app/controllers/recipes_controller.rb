@@ -46,7 +46,7 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    byebug
+    
     if @recipe.update(recipe_params)
       flash[:notice] = "Yeah! Recipe edited!"
       redirect_to root_path
