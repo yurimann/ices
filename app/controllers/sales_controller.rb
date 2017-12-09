@@ -84,6 +84,7 @@ class SalesController < ApplicationController
     session = GoogleDrive::Session.from_config("config.json")
 
     session.spreadsheets.each do |sheet|
+
       if (sheet.title.downcase.include? "sales") && (sheet.title.downcase.include? month) && (sheet.title.downcase.include? year)
 
         page = sheet.worksheets[0]
@@ -91,25 +92,29 @@ class SalesController < ApplicationController
         until x >= (sheet.worksheets[0].rows.length) do
           date = page[x, 1].to_date
           amount_field = 2
+          sales_columns = 6
 
-          until amount_field >= 6 do
+          until amount_field > 6 do
             amount = page[x, amount_field]
 
             if amount.to_f > 0
               amount = amount.split(//)
               amount.delete(",")
-              amount.shift
+              if amount[0] == "$"
+                amount.shift
+              end
               amount = amount.join.to_f
               sales_type = page[2, amount_field].capitalize
             end
-          end
 
-          unless amount <= 0
-            sale = Sale.new(date: date, sales_type: sales_type, amount: amount)
-            unless Sale.exists?(date: date, sales_type: sales_type, amount: amount)
+          unless amount.to_f <= 0
+            sale = Sale.new(date: date, sale_type: sales_type, amount: amount)
+            unless Sale.exists?(date: date, sale_type: sales_type, amount: amount)
               sale.save
             end
           end
+          amount_field += 1
+        end
 
           x += 1
         end
