@@ -1,0 +1,36 @@
+<div class="center">
+  <div class="partition">
+    <h2>Monthly Profits</h2>
+    <h3>Select Date</h3>
+    <%= form_tag profits_month_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+    <!-- <input type="hidden" id="category" name="expenses" value="expenses"> -->
+      <div class="field">
+        <% today = Date.today.month %>
+        <%= label_tag(:month, "month: ") %>
+        <%= select_month(Date.today) %>
+      </div>
+      <div class="field">
+        <%= label_tag(:year, "Year: ") %>
+        <%= select_year(Date.today) %>
+      </div>
+      <div class="field">
+        <%= submit_tag 'Submit', id: "retrieve" %>
+      </div>
+    <% end %>
+  </div>
+<h1>-OR-</h1>
+  <div class="center">
+    <div class="partition">
+      <h2>Year to Date Profits</h2>
+      <h3>Select Date</h3>
+      <%= form_tag profits_year_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+      <!-- <input type="hidden" id="category" name="expenses" value="expenses"> -->
+        <div class="field">
+          <%= label_tag(:year, "Year: ") %>
+          <%= select_year(Date.today) %>
+        </div>
+        <div class="field">
+          <%= submit_tag 'Submit', id: "retrieve" %>
+        </div>
+      <% end %>
+    </div>

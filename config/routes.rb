@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'profits', to: 'profits#index', as: 'profits'
+
+  get 'profits/month'
+
+  get 'profits/year'
+
   root to: "summary#index"
   get 'sales/range', to: 'sales#range', as: 'range'
   get 'expenses/range', to: 'expenses#range', as: 'expenses_range'

@@ -23,6 +23,14 @@ class ApplicationController < ActionController::Base
     month[month_selected]
   end
 
+  def add_up(value)
+    total = 0
+    value.each do |val|
+      total += val.amount
+    end
+    total
+  end
+
   private
 
   def require_login

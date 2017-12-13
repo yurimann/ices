@@ -1,0 +1,17 @@
+<table>
+  <tr>
+    <td colspan="2">Year to Date Totals for <%= @year %></td>
+  </tr>
+  <tr>
+    <td>Total Sales:</td>
+    <td><%= number_to_currency(@sales_totals) %></td>
+  </tr>
+  <tr>
+    <td>Total Expenses:</td>
+    <td><%= number_to_currency(@expense_totals) %></td>
+  </tr>
+  <tr>
+    <td>Net Profits:</td>
+    <td><%= number_to_currency(@profits) %></td>
+  </tr>
+</table>
