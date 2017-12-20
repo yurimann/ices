@@ -54,17 +54,27 @@ class SalesController < ApplicationController
   end
 
   def range
+    #
+    # month = helpers.date_formatter(params[:from][:month])
+    # day = helpers.date_formatter(params[:from][:day])
+    # @from = "#{params[:from][:year]}-#{month}-#{day}"
+    #
+    # to_month = helpers.date_formatter(params[:to][:month])
+    # to_day = helpers.date_formatter(params[:to][:day])
+    # @to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
+    #
+    # @sales = Sale.sale_range(@from, @to)
 
-    month = helpers.date_formatter(params[:from][:month])
-    day = helpers.date_formatter(params[:from][:day])
-    @from = "#{params[:from][:year]}-#{month}-#{day}"
-
-    to_month = helpers.date_formatter(params[:to][:month])
-    to_day = helpers.date_formatter(params[:to][:day])
-    @to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
-
-    @sales = Sale.sale_range(@from, @to)
-
+    @month = parse_number
+    @year = params[:date][:year]
+    if @month != nil
+      range = (@month + @year).to_date
+      @sales = Sale.where("date >= ? AND date <= ?", range.beginning_of_month, range.end_of_month)
+    else
+      year_start = ("January" + @year).to_date.beginning_of_year
+      year_end = year_start.end_of_year
+      @sales = Sale.where("date >= ? AND date <= ?", year_start, year_end).order(:date)
+    end
     respond_to do |format|
       format.html
       format.json { render json: @sales }

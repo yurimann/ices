@@ -1,5 +1,9 @@
 class Sale < ApplicationRecord
 
+  validates :amount, presence: true
+  validates :sale_type, presence: true
+  validates :date, presence: true
+
   def self.sale_range(month_start, month_end)
     result = Sale.where("date >= ? and date <= ?", month_start, month_end).order(:date)
     return result

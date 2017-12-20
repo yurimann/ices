@@ -10,6 +10,8 @@ gem 'sorcery'
 gem 'cocoon'
 gem 'spreadsheet'
 gem 'writeexcel'
+gem "chartkick"
+gem 'groupdate'
 gem 'bcrypt', platforms: :ruby
 gem 'google_drive'
 # gem 'wdm', '>= 0.1.0' if Gem.win_platform?

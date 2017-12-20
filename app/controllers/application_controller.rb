@@ -16,8 +16,10 @@ class ApplicationController < ActionController::Base
   def parse_number
     if params[:month] != nil
       month_selected = params[:month].to_sym
-    else
+    elsif params[:date][:month] != nil
       month_selected = params[:date][:month].to_sym
+    else
+      return nil
     end
     month = {"1": "january", "2": "february", "3": "march", "4": "april", "5": "may", "6": "june", "7": "july", "8": "august", "9": "september", "10": "october", "11": "november", "12": "december"}
     month[month_selected]
