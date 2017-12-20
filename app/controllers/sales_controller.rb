@@ -66,7 +66,13 @@ class SalesController < ApplicationController
     # @sales = Sale.sale_range(@from, @to)
 
     @month = parse_number
-    @year = params[:date][:year]
+    if params[:year] != nil
+      @year = params[:year]
+    elsif params[:date][:year] != nil
+      @year = params[:date][:year]
+    else
+      @year = Date.today.year
+    end
     if @month != nil
       range = (@month + @year).to_date
       @sales = Sale.where("date >= ? AND date <= ?", range.beginning_of_month, range.end_of_month)
