@@ -7,7 +7,7 @@
 <modal id="daily">
   <div class="chart">
     <h2>Sales by Day</h2>
-    <%= column_chart @sales.group_by_day_of_week(:date, format: "%A").sum(:amount) %>
+    <%= column_chart @sales.group_by_day_of_week(:date, format: "%A").sum(:amount).unscoped %>
   </div>
 </modal>
 <modal id="weekly">
@@ -17,7 +17,7 @@
       <%= column_chart @sales.group_by_week(:date).sum(:amount) %>
     <% else %>
       <h2>Sales by Month for <%= @year %></h2>
-      <%= column_chart @sales.group_by_month(:date, format: "%B").sum(:amount) %>
+      <%= column_chart @sales.group_by_month(:date, format: "%B").sum(:amount).unscoped %>
     <% end %>
   </div>
 </modal>
