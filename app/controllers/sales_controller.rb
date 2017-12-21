@@ -71,13 +71,13 @@ class SalesController < ApplicationController
     elsif params[:date][:year] != nil
       @year = params[:date][:year]
     else
-      @year = Date.today.year
+      @year = Date.today.year.to_s
     end
     if @month != nil
       range = (@month + @year).to_date
       @sales = Sale.where("date >= ? AND date <= ?", range.beginning_of_month, range.end_of_month)
     else
-      year_start = ("January" + @year).to_date.beginning_of_year
+      year_start = ("January" + @year.to_s).to_date.beginning_of_year
       year_end = year_start.end_of_year
       @sales = Sale.where("date >= ? AND date <= ?", year_start, year_end).order(:date)
     end
