@@ -13,9 +13,9 @@
   <div class="chart">
     <% if @month != nil %>
       <h2>Expenses by Week for the month of <%= @month.capitalize %>, <%= @year %></h2>
-      <%= column_chart @expenses.group_by_week(:date).sum(:amount) %>
+      <%= column_chart @expenses.unscope(:order).group_by_week(:date).sum(:amount) %>
     <% else %>
-      <h2>Sales by Month for <%= @year %></h2>
+      <h2>Expenses by Month for <%= @year %></h2>
       <%= column_chart @expenses.unscope(:order).group_by_month(:date, format: "%B").sum(:amount) %>
     <% end %>
   </div>

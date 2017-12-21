@@ -48,15 +48,6 @@ class ExpensesController < ApplicationController
 
   def range
 
-    # month = helpers.date_formatter(params[:from][:month])
-    # day = helpers.date_formatter(params[:from][:day])
-    # @from = "#{params[:from][:year]}-#{month}-#{day}"
-    #
-    # to_month = helpers.date_formatter(params[:to][:month])
-    # to_day = helpers.date_formatter(params[:to][:day])
-    # @to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
-
-
     @month = parse_number
     if params[:year] != nil
       @year = params[:year]
