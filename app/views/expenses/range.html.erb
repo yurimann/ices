@@ -1,9 +1,25 @@
 <%= form_tag write_expenses_path, method: :get, target: "_blank",class: "navbar-form navbar-left search-form" do %>
   <input type="hidden" value="<%= @from %>" name="from">
   <input type="hidden" value="<%= @to%>" name="to">
-  <%= submit_tag "Export to CSV", id: "export-button" %>
+  <%= submit_tag "Export to Excel", id: "export-button" %>
 <% end %></br>
-
+<modal id="daily">
+  <div class="chart">
+    <h2>Expenses by Day</h2>
+    <%= column_chart @expenses.unscope(:order).group_by_day_of_week(:date, format: "%A").sum(:amount) %>
+  </div>
+</modal>
+<modal id="weekly">
+  <div class="chart">
+    <% if @month != nil %>
+      <h2>Expenses by Week for the month of <%= @month.capitalize %>, <%= @year %></h2>
+      <%= column_chart @expenses.group_by_week(:date).sum(:amount) %>
+    <% else %>
+      <h2>Sales by Month for <%= @year %></h2>
+      <%= column_chart @expenses.unscope(:order).group_by_month(:date, format: "%B").sum(:amount) %>
+    <% end %>
+  </div>
+</modal>
 <% total = 0 %>
 <table>
   <tr>

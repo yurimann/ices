@@ -10,7 +10,7 @@ gem 'sorcery'
 gem 'cocoon'
 gem 'spreadsheet'
 gem 'writeexcel'
-gem "chartkick"
+gem 'chartkick'
 gem 'groupdate'
 gem 'bcrypt', platforms: :ruby
 gem 'google_drive'

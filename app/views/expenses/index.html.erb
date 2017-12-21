@@ -1,17 +1,39 @@
+
 <div class="center">
   <div class="partition">
-    <h2>Select Date Range</h2>
+    <h2>Monthly Expenses</h2>
+    <h3>Select Date</h3>
     <%= form_tag expenses_range_path, method: :get, class: "navbar-form navbar-left search-form" do %>
-      <% today = Date.today %>
+    <!-- <input type="hidden" id="category" name="expenses" value="expenses"> -->
       <div class="field">
-        <%= label_tag(:from, "From: ") %>
-        <%= select_date(today, prefix: "from") %>
+        <% today = Date.today.month %>
+        <%= label_tag(:month, "month: ") %>
+        <%= select_month(Date.today) %>
       </div>
       <div class="field">
-        <%= label_tag(:to, "To: ") %>
-        <%= select_date(today, prefix: "to") %>
+        <%= label_tag(:year, "Year: ") %>
+        <%= select_year(Date.today) %>
       </div>
-      <%= submit_tag 'Submit'%>
+      <div class="field">
+        <%= submit_tag 'Submit', id: "retrieve" %>
+      </div>
     <% end %>
   </div>
 </div>
+
+<h1 style="text-align:center">-OR-</h1>
+  <div class="center">
+    <div class="partition">
+      <h2>Year to Date Expenses</h2>
+      <h3>Select Date</h3>
+      <%= form_tag expenses_range_path, method: :get, class: "navbar-form navbar-left search-form" do %>
+      <!-- <input type="hidden" id="category" name="expenses" value="expenses"> -->
+        <div class="field">
+          <%= label_tag(:year, "Year: ") %>
+          <%= select_year(Date.today) %>
+        </div>
+        <div class="field">
+          <%= submit_tag 'Submit', id: "retrieve" %>
+        </div>
+      <% end %>
+    </div>

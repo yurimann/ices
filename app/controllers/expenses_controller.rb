@@ -48,16 +48,31 @@ class ExpensesController < ApplicationController
 
   def range
 
-    month = helpers.date_formatter(params[:from][:month])
-    day = helpers.date_formatter(params[:from][:day])
-    @from = "#{params[:from][:year]}-#{month}-#{day}"
+    # month = helpers.date_formatter(params[:from][:month])
+    # day = helpers.date_formatter(params[:from][:day])
+    # @from = "#{params[:from][:year]}-#{month}-#{day}"
+    #
+    # to_month = helpers.date_formatter(params[:to][:month])
+    # to_day = helpers.date_formatter(params[:to][:day])
+    # @to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
 
-    to_month = helpers.date_formatter(params[:to][:month])
-    to_day = helpers.date_formatter(params[:to][:day])
-    @to = "#{params[:to][:year]}-#{to_month}-#{to_day}"
 
-    @expenses = Expense.expense_range(@from, @to)
-
+    @month = parse_number
+    if params[:year] != nil
+      @year = params[:year]
+    elsif params[:date][:year] != nil
+      @year = params[:date][:year]
+    else
+      @year = Date.today.year.to_s
+    end
+    if @month != nil
+      range = (@month + @year).to_date
+      @expenses = Expense.where("date >= ? and date <= ?", range.beginning_of_month, range.end_of_month).order(:date)
+    else
+      year_start = ("January" + @year.to_s).to_date.beginning_of_year
+      year_end = year_start.end_of_year
+      @expenses = Expense.where("date >= ? and date <= ?", year_start, year_end).order(:date)
+    end
     respond_to do |format|
       format.html
       format.json { render json: @expenses }
@@ -87,7 +102,9 @@ class ExpensesController < ApplicationController
           amount = page[x,3]
           amount = amount.split(//)
           amount.delete(",")
-          amount.shift
+          if amount[0] == "$"
+            amount.shift
+          end
           amount = amount.join.to_f
 
           unless amount <= 0

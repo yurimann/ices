@@ -1,3 +1,10 @@
+<modal id="daily">
+  <div class="chart">
+    <h2>Profits by Day</h2>
+    <%= line_chart @weekly_profits %>
+  </div>
+</modal>
+
 <table>
   <tr>
     <td colspan="2">Totals For the Month of <%= @month.capitalize %>, <%= @year %></td>
