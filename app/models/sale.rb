@@ -20,7 +20,7 @@ class Sale < ApplicationRecord
 
   def duplicate_checker
     x = false
-    if Sale.where("date == ? and sale_type == ?", self.date, self.sale_type).any?
+    if Sale.where("date = ? and sale_type = ?", self.date, self.sale_type).any?
       x = true
     end
   end
