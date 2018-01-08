@@ -10,7 +10,6 @@ class SalesController < ApplicationController
 
   def create
     @sale = Sale.new(sales_params)
-
     if @sale.duplicate_checker == nil
       if @sale.save
         flash[:notice] = "Successfully saved"
@@ -71,6 +70,7 @@ class SalesController < ApplicationController
       year_end = year_start.end_of_year
       @sales = Sale.where("date >= ? AND date <= ?", year_start, year_end).order(:date)
     end
+
     respond_to do |format|
       format.html
       format.json { render json: @sales }
@@ -95,8 +95,16 @@ class SalesController < ApplicationController
 
         page = sheet.worksheets[0]
         x = 3
-        until x >= (sheet.worksheets[0].rows.length) do
-          date = page[x, 1].to_date
+
+        until (page.rows[x,1] == nil && page.rows[x + 1,1] == nil) do
+          if page[x,1] == ""
+            x += 1
+          end
+          if page[x, 1] != ""
+            date = (page[x, 1] + "," + params[:year]).to_date
+          else
+            date = ""
+          end
           amount_field = 2
           sales_columns = 6
 
@@ -113,7 +121,7 @@ class SalesController < ApplicationController
               sales_type = page[2, amount_field].capitalize
             end
 
-          unless amount.to_f <= 0
+          unless amount.to_f <= 0 || date == ""
             sale = Sale.new(date: date, sale_type: sales_type, amount: amount)
             unless Sale.exists?(date: date, sale_type: sales_type, amount: amount)
               sale.save
