@@ -22,27 +22,29 @@
   </div>
 </modal>
 
-<table>
-  <tr>
-    <td class="form-header">Date</td>
-    <td class="form-header">Type</td>
-    <td class="form-header">Amount</td>
-  </tr>
-  <% total = 0 %>
-
-  <% @sales.each do |sale| %>
+<% if @month != nil %>
+  <table>
     <tr>
-      <td><%= sale.date %></td>
-      <td><%= sale.sale_type %></td>
-      <td><%= number_to_currency(sale.amount) %></td>
-      <td><%= link_to "Edit", edit_sale_path(sale.id) %></td>
-      <td><%= link_to 'Delete', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td class="form-header">Date</td>
+      <td class="form-header">Type</td>
+      <td class="form-header">Amount</td>
     </tr>
-    <% total += sale.amount %>
-  <% end %>
+    <% total = 0 %>
 
-  <tr>
-    <td class="total" colspan="2">Total sales during the period:</td>
-    <td class="total"><%= number_to_currency(total) %></td>
-  </tr>
-</table>
+    <% @sales.each do |sale| %>
+      <tr>
+        <td><%= sale.date %></td>
+        <td><%= sale.sale_type %></td>
+        <td><%= number_to_currency(sale.amount) %></td>
+        <td><%= link_to "Edit", edit_sale_path(sale.id) %></td>
+        <td><%= link_to 'Delete', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% total += sale.amount %>
+    <% end %>
+
+    <tr>
+      <td class="total" colspan="2">Total sales during the period:</td>
+      <td class="total"><%= number_to_currency(total) %></td>
+    </tr>
+  </table>
+<% end %>

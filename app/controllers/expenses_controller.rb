@@ -84,9 +84,16 @@ class ExpensesController < ApplicationController
 
         page = sheet.worksheets[0]
         x = 3
-        until x >= (sheet.worksheets[0].rows.length) do
+        until (page.rows[x,1] == nil && page.rows[x + 1,1] == nil) do
 
-          date = page[x, 1].to_date
+          if page[x,1] == ""
+            x += 1
+          end
+          if page[x, 1] != ""
+            date = (page[x, 1] + "," + params[:year]).to_date
+          else
+            date = ""
+          end
           expense_type = page[x,2]
           notes = page[x,4]
 
@@ -98,7 +105,7 @@ class ExpensesController < ApplicationController
           end
           amount = amount.join.to_f
 
-          unless amount <= 0
+          unless amount <= 0 || date == ""
             expense = Expense.new(date: date, expense_type: expense_type, amount: amount , notes: notes)
             unless Expense.exists?(date: date, expense_type: expense_type, amount: amount , notes: notes)
               expense.save

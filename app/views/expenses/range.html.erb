@@ -21,26 +21,28 @@
   </div>
 </modal>
 <% total = 0 %>
-<table>
-  <tr>
-    <td class="form-header">Date</td>
-    <td class="form-header">Type</td>
-    <td class="form-header">Notes</td>
-    <td class="form-header">Amount</td>
-  </tr>
-  <% @expenses.each do |expense| %>
-  <tr>
-    <td><%= expense.date %></td>
-    <td><%= expense.expense_type %></td>
-    <td><%= expense.notes %></td>
-    <td><%= number_to_currency(expense.amount) %></td>
-    <td><%= link_to "Edit", edit_expense_path(expense.id) %></td>
-    <td><%= link_to 'Delete', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% total += expense.amount %>
-  </tr>
-  <% end %>
-  <tr>
-    <td class="total" colspan="3" style="text-align:right">Total expenses during the period:</td>
-    <td class="total"><%= number_to_currency(total) %></td>
-  </tr>
-</table>
+<% if @month != nil %>
+  <table>
+    <tr>
+      <td class="form-header">Date</td>
+      <td class="form-header">Type</td>
+      <td class="form-header">Notes</td>
+      <td class="form-header">Amount</td>
+    </tr>
+    <% @expenses.each do |expense| %>
+    <tr>
+      <td><%= expense.date %></td>
+      <td><%= expense.expense_type %></td>
+      <td><%= expense.notes %></td>
+      <td><%= number_to_currency(expense.amount) %></td>
+      <td><%= link_to "Edit", edit_expense_path(expense.id) %></td>
+      <td><%= link_to 'Delete', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% total += expense.amount %>
+    </tr>
+    <% end %>
+    <tr>
+      <td class="total" colspan="3" style="text-align:right">Total expenses during the period:</td>
+      <td class="total"><%= number_to_currency(total) %></td>
+    </tr>
+  </table>
+<% end %>
